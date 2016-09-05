@@ -1,0 +1,1 @@
+# resx2i18next
