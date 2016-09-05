@@ -1,0 +1,23 @@
+{
+  "name": "resx2i18next",
+  "version": "1.0.0",
+  "description": "0.1.0",
+  "main": "resx2i18next.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandpd/resx2i18next.git"
+  },
+  "keywords": [
+    "i18next",
+    "resx"
+  ],
+  "author": "Roland Domagalski",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rolandpd/resx2i18next/issues"
+  },
+  "homepage": "https://github.com/rolandpd/resx2i18next#readme"
+}
