@@ -19,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/rolandpd/resx2i18next/issues"
   },
-  "homepage": "https://github.com/rolandpd/resx2i18next#readme"
+  "homepage": "https://github.com/rolandpd/resx2i18next#readme",
+  "devDependencies": {
+    "eslint": "^3.7.0"
+  },
+  "dependencies": {
+    "object-assign": "^4.1.0",
+    "path": "^0.12.7",
+    "stream": "0.0.2",
+    "util": "^0.10.3",
+    "vinyl": "^2.0.0",
+    "vinyl-fs": "^2.4.3",
+    "xml2js": "^0.4.17"
+  }
 }

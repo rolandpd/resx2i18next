@@ -1,0 +1,10 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "strict": 0,
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
+}
