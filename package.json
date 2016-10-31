@@ -3,8 +3,11 @@
   "version": "1.0.1",
   "description": "0.1.0",
   "main": "resx2i18next.js",
+  "bin": {
+    "resx2json": "cli/resx2json.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "resx2json -up 3 test/i18n/**/*.resx test/out"
   },
   "repository": {
     "type": "git",
@@ -24,9 +27,12 @@
     "eslint": "^3.7.0"
   },
   "dependencies": {
+    "ltcdr": "^2.2.1",
+    "noms": "0.0.0",
     "object-assign": "^4.1.0",
     "path": "^0.12.7",
     "stream": "0.0.2",
+    "through2": "^2.0.1",
     "util": "^0.10.3",
     "vinyl": "^2.0.0",
     "vinyl-fs": "^2.4.3",
