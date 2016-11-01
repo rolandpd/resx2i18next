@@ -1,23 +1,15 @@
 /*eslint-env node */
 'use strict';
 var path = require('path');
-var fs = require('fs');
-var glob = require('glob');
-var mkdirp = require('mkdirp');
-var through = require('through2').obj;
-var noms = require('noms').obj;
+//var fs = require('fs');
 
-function toStream(array) {
-  var length = array.length;
-  var i = 0;
-  return noms(function (done) {
-    if (i >= length) {
-      this.push(null);
-    }
-    this.push(array[i++]);
-    done();
-  });
-}
+//var mkdirp = require('mkdirp');
+
+var FilePathsSource = require('./src/filePathsSource-compiled').Transform;
+var UnglobbedFilePaths = require('./src/unglobbedFilePathsTransform-compiled').Transform;
+var TransformResx2Json = require('./src/transformResx2Json-compiled').Transform;
+var CollectOutputFiles = require('./src/collectOutputFiles-compiled').Transform;
+var FilesSink = require('./src/filesSink-compiled').Transform;
 
 function depth(string) {
   return path.normalize(string).split(path.sep).length - 1;
@@ -39,28 +31,29 @@ function dealWith(inPath, up) {
 function copyFiles(args, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
-    opts = 0;
   }
-  opts = opts || 0;
   if (typeof callback !== 'function') {
     throw new Error('callback is not optional');
   }
+
   var input = args.slice();
   var outDir = input.pop();
-  toStream(input)
+  var transformResx2Json = new TransformResx2Json(args);
+  var filePathsSource = new FilePathsSource(input);
+  var unglobbedFilePaths = new UnglobbedFilePaths();
+  var collectOutputFiles = new CollectOutputFiles({out: outDir});
+  var filesSink = new FilesSink();
+
+  filePathsSource
+    .pipe(unglobbedFilePaths)
+    .pipe(transformResx2Json)
+    .pipe(collectOutputFiles)
+    .pipe(filesSink)
+    /*
     .pipe(through(function (pathName, _, next) {
-      var self = this;
-      glob(pathName, function (err, paths) {
-        if (err) {
-          return next(err);
-        }
-        paths.forEach(function (unglobbedPath) {
-          self.push(unglobbedPath);
-        });
-        next();
-      });
-    }))
-    .pipe(through(function (pathName, _, next) {
+
+      // Pfade anlegen mit mkdir
+
       fs.stat(pathName, function (err, pathStat) {
         if (err) {
           return next(err);
@@ -81,12 +74,15 @@ function copyFiles(args, opts, callback) {
       });
     }))
     .pipe(through(function (pathName, _, next) {
+
+      // durchstreamen
+
       var outName = path.join(outDir, dealWith(pathName, opts));
       fs.createReadStream(pathName)
         .pipe(fs.createWriteStream(outName))
         .on('error', next)
         .on('finish', next);
-    }))
+    }))*/
     .on('error', callback)
     .on('finish', callback);
 }

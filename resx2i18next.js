@@ -5,9 +5,10 @@ var vfs = require('vinyl-fs');
 var File = require('vinyl');
 var assign = require("object-assign");
 var stream = require("stream");
-var xml2js = require("xml2js");
 var path = require("path");
 var util = require("util");
+
+var xml2js = require("xml2js");
 var parser = new xml2js.Parser();
 
 function filenameInfo(filename) {

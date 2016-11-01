@@ -7,7 +7,8 @@
     "resx2json": "cli/resx2json.js"
   },
   "scripts": {
-    "test": "resx2json -up 3 test/i18n/**/*.resx test/out"
+    "test": "resx2json -up 3 test/i18n/**/*.resx test/out",
+    "link": "npm link"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,10 @@
   },
   "homepage": "https://github.com/rolandpd/resx2i18next#readme",
   "devDependencies": {
-    "eslint": "^3.7.0"
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.0",
+    "babel-preset-es2015": "^6.18.0",
+    "eslint": "^3.9.0"
   },
   "dependencies": {
     "ltcdr": "^2.2.1",
@@ -36,6 +40,6 @@
     "util": "^0.10.3",
     "vinyl": "^2.0.0",
     "vinyl-fs": "^2.4.3",
-    "xml2js": "^0.4.17"
+    "xml2js-es6-promise": "^1.1.1"
   }
 }
